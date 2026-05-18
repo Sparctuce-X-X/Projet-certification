@@ -1,0 +1,32 @@
+# Supabase Edge Functions config.
+#
+# Note : la nouvelle CLI Supabase ne supporte plus `--no-verify-jwt` au
+# déploiement. Faut configurer ici par fonction.
+#
+# verify_jwt = true (default) → le gateway Supabase exige un JWT valide
+# Authorization Bearer (sinon 401 UNAUTHORIZED_INVALID_JWT_FORMAT). Le JWT
+# peut être réécrit par le gateway avant d'arriver à la fonction.
+#
+# verify_jwt = false → le gateway laisse passer toute requête. La fonction
+# doit gérer son auth elle-même (ex: signature webhook, secret partagé).
+
+[functions.pawapay-webhook]
+verify_jwt = false  # PawaPay envoie ses callbacks sans JWT (vérif HMAC interne)
+
+[functions.send-push-notification]
+verify_jwt = false  # appelée par pg_net trigger DB avec NIQO_INTERNAL_KEY custom
+
+[functions.send-alert-digest]
+verify_jwt = false  # appelée par pg_cron via pg_net (mig 108) avec NIQO_INTERNAL_KEY
+
+[functions.moderate-message]
+verify_jwt = false  # appelée par trigger DB AFTER INSERT messages via pg_net + NIQO_INTERNAL_KEY
+
+[functions.send-welcome-email]
+verify_jwt = false  # appelée par trigger DB AFTER INSERT users (mig 124) via pg_net + NIQO_INTERNAL_KEY
+
+[functions.send-admin-notification]
+verify_jwt = false  # appelée par triggers DB (mig 125) via pg_net + NIQO_INTERNAL_KEY
+
+[functions.send-payment-confirmation]
+verify_jwt = false  # appelée par trigger DB (mig 126) via pg_net + NIQO_INTERNAL_KEY
