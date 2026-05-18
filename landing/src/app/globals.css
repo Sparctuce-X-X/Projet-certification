@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-niqo-black: #1A1A1A;
+  --color-niqo-coral: #D85A30;
+  --color-niqo-coral-dark: #A8421F; /* 6.0:1 sur blanc — AA pour pre-titles font-sm */
+  --color-niqo-coral-light: #FAECE7;
+  --color-niqo-white: #FFFFFF;
+  --color-niqo-gray-50: #FAFAFA;
+  --color-niqo-gray-100: #F0F0EE;
+  --color-niqo-gray-200: #E5E5E5;
+  --color-niqo-gray-500: #888780;
+  --color-niqo-gray-800: #444441;
+  --color-niqo-success: #1D9E75;
+  --color-niqo-danger: #E24B4A;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Fluid editorial type — hero seulement */
+  --text-mega: clamp(2.25rem, 12vw, 11rem);
+  --text-mega--line-height: 0.92;
+  --text-mega--letter-spacing: -0.045em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-niqo-white);
+  color: var(--color-niqo-black);
+  font-family: var(--font-body);
+}
+
+/* Focus visible global — accessibilité clavier */
+:focus-visible {
+  outline: 2px solid var(--color-niqo-coral);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Carousel mobile : cacher la scrollbar tout en gardant le scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
