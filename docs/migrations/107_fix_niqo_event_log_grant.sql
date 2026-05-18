@@ -1,0 +1,39 @@
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Migration 107 — Fix niqo_event_log : GRANT SELECT to authenticated
+--
+-- BUG MIG 106
+--   La mig 106 a fait `revoke all on niqo_event_log from authenticated` puis
+--   créé une policy SELECT filtrée par `users.is_admin`. Mais en Supabase /
+--   PostgREST, les grants table-level sont évalués AVANT les policies RLS :
+--
+--     1. Grant table-level → "qui peut faire un SQL sur cette table ?"
+--     2. Policies RLS      → "quelles rows ce SQL voit-il ?"
+--
+--   Sans GRANT SELECT, PostgREST renvoie 42501 "permission denied for table"
+--   avant même d'évaluer la policy. Symptôme côté admin web :
+--     [observability] query failed { code: '42501', ... }
+--
+-- FIX
+--   GRANT SELECT à authenticated. La policy `niqo_event_log_select_admin`
+--   (mig 106) continue à filtrer les rows : seul un user authentifié dont
+--   `users.is_admin = true` voit des rows ; les autres authenticated reçoivent
+--   un résultat vide (pas d'erreur).
+--
+--   Pas de grant INSERT/UPDATE/DELETE : seul service_role + RPC SECURITY
+--   DEFINER `log_event` peuvent insérer. Comportement inchangé vs mig 106.
+--
+--   anon et public restent revoked (table interne, non exposable au monde).
+--
+-- VÉRIFICATION POST-DEPLOY
+--   -- En tant qu'admin Supabase Dashboard SQL Editor :
+--   set role authenticated;
+--   select count(*) from public.niqo_event_log;  -- doit retourner 0 (RLS filter)
+--   reset role;
+--
+--   -- En tant qu'admin web (avec session is_admin=true) :
+--   -- → /admin/observability charge sans erreur 42501
+--
+-- Idempotente. Cf. CLAUDE.md §Migrations Supabase.
+-- ─────────────────────────────────────────────────────────────────────────────
+
+grant select on public.niqo_event_log to authenticated;
