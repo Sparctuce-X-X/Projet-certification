@@ -1,0 +1,100 @@
+# ──────────────────────────────────────────────────────────────────────
+# Niqo — .gitignore racine (mobile Expo + landing Next.js + Supabase)
+# ──────────────────────────────────────────────────────────────────────
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+out/
+*.tgz
+*.tar.gz
+
+# Expo
+.expo/
+.expo-shared/
+expo-env.d.ts.bak
+
+# Next.js (landing/)
+.next/
+landing/.next/
+landing/out/
+landing/.vercel/
+
+# iOS native build
+ios/build/
+ios/Pods/
+ios/DerivedData/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+ios/.xcode.env.local
+
+# Android native build
+android/.gradle/
+android/build/
+android/app/build/
+android/app/release/
+*.keystore
+*.jks
+*.p8
+*.p12
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ─── Secrets — JAMAIS dans le repo ───────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.test.example
+!*.env.example
+
+# Service accounts & API keys
+firebase-service-account.json
+google-services.json
+GoogleService-Info.plist
+*-service-account.json
+*serviceaccount*.json
+secrets.json
+
+# Supabase local state
+supabase/.branches/
+supabase/.temp/
+
+# Tests
+coverage/
+.nyc_output/
+
+# Claude Code workspace
+.claude/
+
+# EAS
+.easignore.bak
+eas-build-cache/
+
+# Misc
+*.iml
+.history/
+.turbo/
