@@ -6,6 +6,10 @@ Documentation projet Niqo. Organisée par usage.
 
 ## Top-level
 
+- **[CAHIER_DES_CHARGES.md](./CAHIER_DES_CHARGES.md)** — Cahier des charges v5.0 (dossier RNCP CDA) — specs produit, archi, features F01-F15, planning, mapping compétences.
+- **[methodologie-uml.md](./methodologie-uml.md)** — Méthodologie d'analyse UML pour la certification RNCP CDA : démarche top-down itérative + 6 diagrammes PlantUML (Use Case, Classes, Séquence ×3, État, Activité, Déploiement) + mapping aux 3 blocs RNCP.
+- **[tests-et-deploiement.md](./tests-et-deploiement.md)** — Stratégie de tests (pgTAP + Vitest + UX) avec exemples concrets, CI/CD, EAS Build, soumission App Store/Play Store, déploiement Supabase + Vercel, OTA vs rebuild, monitoring 3 piliers, rollback et incident response. Cible Bloc RNCP3 CDA.
+- **[environnement-et-implementation.md](./environnement-et-implementation.md)** — Environnement technique & implémentation pour le RNCP CDA (Blocs 1+2) : stack mobile (Expo SDK 54 + RN 0.81), backend Supabase (Postgres + RLS + RPCs + triggers + 13 Edge Functions Deno), admin web (Next.js 16 + RSC + Server Actions), services tiers (PawaPay/OpenAI/Rekognition/Resend/Sentry/Expo Push), organisation du code, patterns transverses (auth provider, withTimeout, pending actions, cascade RGPD), OWASP, perf devices entry-level, choix techniques argumentés.
 - **[design-system.md](./design-system.md)** — Tokens visuels (couleurs, typo, spacing) + interprétation humaine de la charte de marque. Source de vérité pour le code UI.
 - **[pre-production-checklist.md](./pre-production-checklist.md)** — Checklist maître pré-prod : modules backend à backfill (doc + tests pgTAP/Vitest), tests UX manuels par feature, livrables infra/légal/business avant GO live.
 - **[gotchas.md](./gotchas.md)** — Pièges déjà rencontrés et solutions (IDE, RN/Expo, Supabase, Vercel, UGC compliance, EAS Build/Update, App Store Connect). À consulter avant de chercher plus loin sur un bug.
